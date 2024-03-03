@@ -1,0 +1,19 @@
+sequenceDiagram
+title Task 0.6: New note in SPA diagram
+actor User
+participant Browser
+participant Server
+
+User->>Browser: Make a new note by form submission
+activate Browser
+
+Note right of Browser: At this time, the 'onsubmit' event handler is triggered <br> and then the DOM tree is changed to reflect the new note immediately <br> on the user screen
+
+Browser->>Server: Send a single request with the Content-Type header set to <br> 'application/json' and the new note data converted to JSON format as the payload <br> POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+activate Server
+Server-->>Browser: Return the response message:  {"message":"note created"} <br> 201 Created
+deactivate Server
+
+Note over Browser: The new note has been created successfully
+deactivate Browser
+    
