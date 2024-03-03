@@ -1,0 +1,38 @@
+sequenceDiagram
+    title Task 0.5: Single page app diagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: Go to https://studies.cs.helsinki.fi/exampleapp/spa
+    activate Browser
+
+    Browser->>Server: Fetch the HTML document: <br> GET https://studies.cs.helsinki.fi/exampleapp/spa 
+    activate Server
+    Server-->>Browser: Return the HTML document (without any rendered notes)
+    deactivate Server
+
+    Browser->>Server: Fetch the CSS file: <br> GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Server
+    Server-->>Browser: Return the CSS file
+    deactivate Server
+
+    Browser->>Server: Fetch JS file: <br> GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate Server
+    Server-->>Browser: Return the JS file
+    deactivate Server
+
+    Note right of Browser: At this time, the browser begins executing the JavaScript code that <br> fetches JSON data from the server
+
+    Browser->>Server: Fetch the JSON data: <br> https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server
+    Server-->>Browser: Return the JSON file <br> [{content: "", date: "2024-03-02T21:07:21.752Z"}, ...]
+    deactivate Server
+
+    Note right of Browser: Subsequently, the 'onreadystatechange' event handler is triggered to <br> manipulate the DOM and display all notes
+
+    Browser-->>User: The web page is ready to use
+
+    deactivate Browser
+
+    
